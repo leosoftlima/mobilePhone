@@ -1,0 +1,14 @@
+CREATE TABLE `mobilephone`.`phone` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(75) NULL,
+  `brand` VARCHAR(75) NULL,
+  `description` VARCHAR(255) NULL,
+  `release_date` DATE NULL,
+  `price` DOUBLE NULL,
+  PRIMARY KEY (`id`));
+  
+  
+   <p:confirmDialog widgetVar="confirmDlg" resizable="true" header="Aviso" modal="true" draggable="false" message="Deseja, realmente, excluir o Mobile Phone?" closable="false" >
+					<p:commandButton value="Sim" action="#{phoneMBean.excluir()}" oncomplete="confirmDlg.hide();" process="@all" />
+					<p:commandButton value="Não" onclick="confirmDlg.hide();" />
+   </p:confirmDialog>
