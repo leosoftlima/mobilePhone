@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+   
+   <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"     
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:composition template="/WEB-INF/template/templateMenu.xhtml">
+		<ui:define name="container">
+        
+        <h:form>
+        <p:panel header="Lista de Mobile Phone">
+        <p:commandButton value="Adicionar" action="#{phoneMBean.carregarTelaAdicionar}"></p:commandButton>
+        <p:separator/>
+        <p:dataTable var="phone" value="#{phoneMBean.phones}">
+                       
+             <p:column>
+                <f:facet name="header">Name</f:facet>
+               <h:outputText value="#{phone.name}" >
+               </h:outputText>
+             </p:column>
+           
+             <p:column>
+                <f:facet name="header">Brand</f:facet>
+               <h:outputText value="#{phone.brand}" >
+               </h:outputText>
+             </p:column>
+           
+             <p:column>
+                <f:facet name="header">Description</f:facet>
+               <h:outputText value="#{phone.description}" >
+               </h:outputText>
+               
+             </p:column>
+             
+             <p:column style="text-align:center !important;}">
+                <f:facet name="header">Release Date</f:facet>
+               <h:outputText value="#{phone.releaseDate}" >
+                   <f:convertDateTime pattern="dd/MM/yyyy" />
+               </h:outputText>
+             </p:column>
+             
+             <p:column style="text-align:center !important;}">
+                <f:facet name="header">Price</f:facet>
+               <h:outputText value="R$ #{phone.price}" >
+                      <f:convertNumber pattern="#.##0,00" minFractionDigits="2"  />  
+               </h:outputText>
+             </p:column>
+             
+             <p:column style="text-align:center !important;}">
+                <f:facet name="header">Operações</f:facet>
+                      <p:commandLink action="#{phoneMBean.carregarTelaAlteracao(phone)}"> 
+			                   <h:graphicImage value="/imagens/alterar.png" title="Alterar Mobile Phone"/>
+			            </p:commandLink>	 
+		        	    <p:commandLink style="margin-left:10%;" action="#{phoneMBean.setPhone(phone)}" oncomplete="confirmDlg.show();" >
+			         		   <h:graphicImage value="/imagens/excluir.png" title="Excluir Mobile Phone" />
+	    				</p:commandLink>
+             </p:column>
+             
+          </p:dataTable> 
+             <p:confirmDialog widgetVar="confirmDlg" resizable="true" header="Aviso" modal="true" draggable="false" message="Deseja, realmente, excluir o Mobile Phone?" closable="false" >
+					<p:commandButton value="Sim" action="#{phoneMBean.excluir}" oncomplete="confirmDlg.hide();"  />
+					<p:commandButton value="Não" onclick="confirmDlg.hide();" />
+         </p:confirmDialog>
+         </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>
+

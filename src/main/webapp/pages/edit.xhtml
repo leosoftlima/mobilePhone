@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+   
+   <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"     
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:composition template="/WEB-INF/template/templateMenu.xhtml">
+		<ui:define name="container">
+
+        <h:form>
+        <p:panel header="Formulário de Cadastro Mobile Phone">
+          <h:panelGrid columns="2">
+           
+           <h:outputLabel>Name: </h:outputLabel>
+           <p:inputText value="#{phoneMBean.phone.name}" size="45">
+              <f:validateLength maximum="75" />
+           </p:inputText>
+           
+           <h:outputLabel>Brand: </h:outputLabel>
+           <p:inputText value="#{phoneMBean.phone.brand}" size="45">
+               <f:validateLength maximum="75" />
+           </p:inputText>
+           
+           <h:outputLabel>Description: </h:outputLabel>
+           <p:inputTextarea id="description" rows="3" cols="46" autoResize="false" styleClass="textAreaDescricao" style="width: 360px; height:75px;" 
+							value="#{phoneMBean.phone.description}" maxlength="255" counter="ocPOC2NotesTx_counter" counterTemplate="{0} remaining characters."  immediate="true">
+						</p:inputTextarea>
+						<p:spacer/>
+	        <h:outputText id="ocPOC2NotesTx_counter" />
+          
+           <h:outputLabel>Release Date: </h:outputLabel>
+           <p:calendar value="#{phoneMBean.phone.releaseDate}"  pattern="dd/MM/yyyy" locale="pt" showOn="button"/>
+           
+           <h:outputLabel>Price: </h:outputLabel>
+           <p:inputText value="#{phoneMBean.phone.price}" onkeypress="mascara(this, valor);" immediate="true">
+             <f:convertNumber pattern="#,##0.00" /> 
+           </p:inputText>
+                  
+              <p:commandButton id="buttonIncluir" value="Incluir" action="#{phoneMBean.incluirPhone}" rendered="#{phoneMBean.flagIncluirAlterar}"/>
+              <p:commandButton id="buttonAlterar" value="Alterar" action="#{phoneMBean.alterarPhone}" rendered="#{!phoneMBean.flagIncluirAlterar}"/>
+              <p:commandButton id="buttonVoltar" value="Voltar" action="#{phoneMBean.voltar}"/>
+          </h:panelGrid> 
+         </p:panel>
+            
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>
+
